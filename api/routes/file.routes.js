@@ -5,10 +5,10 @@ module.exports = (app) => {
 
     app.use(require('connect-busboy')())
 
-    app.route('/file')
+    app.route('/files')
         .get(fileController.list)
         .post(fileController.upload)
 
-    app.route('/file/:fileName')
+    app.route('/files/:fileId')
         .get(fileController.download)
 }

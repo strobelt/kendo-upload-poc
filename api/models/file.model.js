@@ -8,7 +8,8 @@ const FileSchema = new Schema({
     uploadDate: {
         type: Date,
         default: new Date()
-    }
+    },
+    product: { type: Schema.Types.ObjectId, ref: 'Product' }
 })
 
 module.exports = mongoose.model('File', FileSchema)

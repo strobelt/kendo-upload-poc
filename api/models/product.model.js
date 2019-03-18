@@ -17,7 +17,8 @@ const ProductSchema = new Schema({
         categoryName: String,
         description: String
     },
-    firstOrderedOn: Date
+    firstOrderedOn: Date,
+    files: [{ type: Schema.Types.ObjectId, ref: 'File' }]
 })
 
-module.exports = mongoose.model('Products', ProductSchema)
+module.exports = mongoose.model('Product', ProductSchema)

@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose'),
-    Product = mongoose.model('Products')
+    Product = mongoose.model('Product')
 
 exports.list_all_products = (_req, res) =>
     Product.find({}, (err, products) => {
@@ -19,11 +19,13 @@ exports.create_product = (req, res) =>
     })
 
 exports.read_product = (req, res) =>
-    Product.findById(req.params.productId, (err, product) => {
-        if (err)
-            res.send(err)
-        res.json(product)
-    })
+    Product.findById(req.params.productId)
+        .populate('product')
+        .exec((err, product) => {
+            if (err)
+                res.send(err)
+            res.json(product)
+        })
 
 exports.update_product = (req, res) =>
     Product.findOneAndUpdate({ _id: req.params.productId }, req.body, (err, product) => {

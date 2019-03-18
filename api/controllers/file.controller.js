@@ -6,7 +6,8 @@ const fs = require('fs'),
     filesDir = path.join(appDir, 'files'),
     shortId = require('shortid'),
     mongoose = require('mongoose'),
-    File = mongoose.model('File')
+    File = mongoose.model('File'),
+    Product = mongoose.model('Product')
 
 const getPath = (fileName) =>
     path.join(filesDir, fileName)
@@ -25,19 +26,32 @@ exports.upload = function (req, res) {
         fstream.on('close', () => {
             new File({
                 originalFileName: fileName,
-                fileName: path.basename(filePath)
+                fileName: path.basename(filePath),
+                product: req.query.productId
             }).save((err, file) => {
                 if (err)
                     res.send(err)
-                res.status(200).send(file)
+                Product.findById(req.query.productId, function (err, product) {
+                    if (err)
+                        res.send(err)
+                    if (!product.files) product.files = []
+                    product.files.push(file)
+                    product.save()
+                    res.status(200).send(file)
+                })
             })
         })
         file.pipe(fstream)
     })
 }
 
-exports.download = (req, res) =>
-    res.download(getPath(req.params.fileName))
+exports.download = function (req, res) {
+    File.findById(req.params.fileId, function (err, file) {
+        if (err)
+            res.send(err)
+        res.download(getPath(file.fileName))
+    })
+}
 
 exports.list = (_req, res) =>
     File.find({}, (err, files) => {
