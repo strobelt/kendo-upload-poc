@@ -27,11 +27,11 @@ exports.upload = function (req, res) {
             new File({
                 originalFileName: fileName,
                 fileName: path.basename(filePath),
-                product: req.query.productId
+                product: req.params.productId
             }).save((err, file) => {
                 if (err)
                     res.send(err)
-                Product.findById(req.query.productId, function (err, product) {
+                Product.findById(file.productId, function (err, product) {
                     if (err)
                         res.send(err)
                     if (!product.files) product.files = []
@@ -46,16 +46,18 @@ exports.upload = function (req, res) {
 }
 
 exports.download = function (req, res) {
-    File.findById(req.params.fileId, function (err, file) {
-        if (err)
-            res.send(err)
-        res.download(getPath(file.fileName))
-    })
+    File.findOne({ _id: req.params.fileId, product: req.params.productId },
+        function (err, file) {
+            if (err)
+                res.send(err)
+            res.download(getPath(file.fileName))
+        })
 }
 
-exports.list = (_req, res) =>
-    File.find({}, (err, files) => {
-        if (err)
-            res.send(err)
-        res.json(files)
-    })
+exports.list = (req, res) =>
+    File.find({ product: req.params.productId },
+        function (err, files) {
+            if (err)
+                res.send(err)
+            res.json(files)
+        })

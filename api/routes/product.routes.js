@@ -2,6 +2,7 @@
 
 module.exports = (app) => {
     const productController = require('../controllers/product.controller')
+    const filesController = require('../controllers/file.controller')
 
     // product routes
     app.route('/products')
@@ -12,4 +13,11 @@ module.exports = (app) => {
         .get(productController.read_product)
         .put(productController.update_product)
         .delete(productController.delete_product)
+
+    app.route('/products/:productId/files')
+        .get(filesController.list)
+        .post(filesController.upload)
+
+    app.route('/products/:productId/files/:fileId')
+        .get(filesController.download)
 }

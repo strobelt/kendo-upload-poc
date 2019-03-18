@@ -24,10 +24,6 @@ app.use(bodyParser.json())
 var productRoutes = require('./routes/product.routes')
 productRoutes(app)
 
-var fileRoutes = require('./routes/file.routes')
-fileRoutes(app)
-
-
 app.listen(port)
 
 console.log('API listening on port ' + port)
