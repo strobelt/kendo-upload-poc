@@ -80,4 +80,6 @@ export class ProductsComponent implements OnInit {
   public removeHandler({ dataItem }) {
     this.productService.remove(dataItem);
   }
+
+  public hasFiles = (dataItem: Product): boolean => dataItem.files && dataItem.files.length > 0;
 }

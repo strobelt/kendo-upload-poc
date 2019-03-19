@@ -11,6 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ProductService } from './products/products.service';
 import { ProductFilesComponent } from './products/product-files/product-files.component';
 import { ApiInterceptor } from './interceptors/api-interceptor';
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ApiInterceptor } from './interceptors/api-interceptor';
     AppRoutingModule,
     GridModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ButtonsModule
   ],
   providers: [
     ProductService,

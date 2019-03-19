@@ -58,7 +58,8 @@
     </ng-template>
   </kendo-grid-command-column>
   <ng-template kendoGridDetailTemplate
-               let-dataItem>
+               let-dataItem
+               [kendoGridDetailTemplateShowIf]="hasFiles">
     <app-product-files [product]="dataItem"></app-product-files>
   </ng-template>
 </kendo-grid>

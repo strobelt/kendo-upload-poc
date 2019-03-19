@@ -1,3 +1,10 @@
-<p>
-  {{product | json}}
-</p>
+<ul>
+  <li *ngFor="let file of view | async">
+    <span><b>{{file.originalFileName}}</b> uploaded on <b>{{file.uploadDate | date:'dd/MM/yyyy HH:mm:ss'}}</b></span>
+    <button kendoButton
+            class="download-button"
+            [icon]="'download'"
+            (click)="downloadFile(file._id)">
+    </button>
+  </li>
+</ul>
