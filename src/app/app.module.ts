@@ -12,6 +12,11 @@ import { ProductService } from './products/products.service';
 import { ProductFilesComponent } from './products/product-files/product-files.component';
 import { ApiInterceptor } from './interceptors/api-interceptor';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { UploadModule } from '@progress/kendo-angular-upload';
+import { ProductFilesUploadComponent } from './products/product-files-upload/product-files-upload.component';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
+
+
 
 @NgModule({
   declarations: [
@@ -19,7 +24,8 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
     ProductsComponent,
     NavbarComponent,
     ProductsComponent,
-    ProductFilesComponent
+    ProductFilesComponent,
+    ProductFilesUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +33,9 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
     GridModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ButtonsModule
+    ButtonsModule,
+    UploadModule,
+    DialogsModule
   ],
   providers: [
     ProductService,

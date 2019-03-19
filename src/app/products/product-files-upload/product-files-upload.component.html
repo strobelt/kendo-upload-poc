@@ -1,0 +1,11 @@
+<kendo-dialog *ngIf="active"
+              (close)="close()"
+              [minWidth]="250"
+              [width]="450">
+  <kendo-dialog-titlebar>
+    Upload files to <b>{{product?.name}}</b>
+  </kendo-dialog-titlebar>
+  <kendo-upload [autoUpload]="false"
+                (upload)="uploadEventHandler($event)">
+  </kendo-upload>
+</kendo-dialog>

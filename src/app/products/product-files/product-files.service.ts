@@ -29,6 +29,17 @@ export class ProductFilesService extends BehaviorSubject<ProductFile[]> {
       .subscribe(data => super.next(data))
   }
 
+  upload(productId: string, file: File): void {
+    this.reset();
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    this.http
+      .post(this.route(productId), formData)
+      .subscribe(() => this.read(productId), () => this.read(productId));
+  }
+
   private fetch = (productId: string): Observable<ProductFile[]> =>
     this.http
       .get(this.route(productId))

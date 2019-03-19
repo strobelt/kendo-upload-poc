@@ -8,6 +8,8 @@ import { State, process } from '@progress/kendo-data-query';
 import { map } from 'rxjs/operators/map';
 import { ProductService } from './products.service';
 import { Product } from './products.model';
+import { UploadEvent } from '@progress/kendo-angular-upload';
+import { ProductFilesService } from './product-files/product-files.service';
 
 @Component({
   selector: 'app-products',
@@ -22,6 +24,7 @@ export class ProductsComponent implements OnInit {
     take: 10
   };
   public formGroup: FormGroup;
+  public productToUploadFiles: Product;
 
   constructor(private productService: ProductService) { }
 
@@ -33,7 +36,6 @@ export class ProductsComponent implements OnInit {
 
   public onStateChange(state: State) {
     this.gridState = state;
-
     this.productService.read();
   }
 
@@ -82,4 +84,7 @@ export class ProductsComponent implements OnInit {
   }
 
   public hasFiles = (dataItem: Product): boolean => dataItem.files && dataItem.files.length > 0;
+
+  public openUploadModal = (product: Product) =>
+    this.productToUploadFiles = product;
 }

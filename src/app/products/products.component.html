@@ -47,14 +47,16 @@
     </ng-template>
   </kendo-grid-column>
   <kendo-grid-command-column title="Actions"
-                             width="220">
+                             width="320">
     <ng-template kendoGridCellTemplate
-                 let-isNew="isNew">
-      <button kendoGridEditCommand
+                 let-isNew="isNew"
+                 let-dataItem>
+      <button (click)="openUploadModal(dataItem)">Upload Files</button>
+      <!-- <button kendoGridEditCommand
               [primary]="true">Edit</button>
       <button kendoGridRemoveCommand>Remove</button>
       <button kendoGridSaveCommand>{{ isNew ? 'Add' : 'Update' }}</button>
-      <button kendoGridCancelCommand>{{ isNew ? 'Discard Changes' : 'Cancel' }}</button>
+      <button kendoGridCancelCommand>{{ isNew ? 'Discard Changes' : 'Cancel' }}</button> -->
     </ng-template>
   </kendo-grid-command-column>
   <ng-template kendoGridDetailTemplate
@@ -63,3 +65,4 @@
     <app-product-files [product]="dataItem"></app-product-files>
   </ng-template>
 </kendo-grid>
+<app-product-files-upload [model]="productToUploadFiles"></app-product-files-upload>
