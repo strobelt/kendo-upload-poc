@@ -1,6 +1,15 @@
 # PocUpload
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
+## Description
+A document management system that allows users to attach one or many document to a record, from a GUI perspective: 
+A user will click a button to attach one or many documents to a grid line. 
+- allowed document types are pdf or jpg
+- Documents size are limited to 25 Mb per document 
+User can preview documents (pdf) within the GUI 
+- user can add or delete document
+- there’s an audit trail keeping track of who did what. 
+
+This PoC need to be built with Telerik components, the concept will be heavily used throughout the system
 
 ## Development server
 
