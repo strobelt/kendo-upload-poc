@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../products.model';
 import { environment } from 'src/environments/environment';
+import { FileRestrictions } from '@progress/kendo-angular-upload';
 
 @Component({
   selector: 'app-product-files-upload',
@@ -18,6 +19,11 @@ export class ProductFilesUploadComponent {
 
   @Output() close = new EventEmitter();
   @Output() uploadComplete = new EventEmitter();
+
+  public fileRestrictions: FileRestrictions = {
+    maxFileSize: 25000000,
+    allowedExtensions: ['.pdf', '.jpg']
+  }
 
   public closeModal() {
     this.active = false;

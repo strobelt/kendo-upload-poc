@@ -8,6 +8,13 @@
   <kendo-upload [autoUpload]="false"
                 [withCredentials]="false"
                 (complete)="uploadCompleteEvent()"
+                [restrictions]="fileRestrictions"
                 [saveUrl]="uploadUrl()">
   </kendo-upload>
+  <div class="info">
+    <p>Only <strong>{{fileRestrictions.allowedExtensions.join(', ')}}</strong> files allowed.
+    </p>
+    <p>Maximum upload size of <strong>{{fileRestrictions.maxFileSize / 1000000}}MB</strong>
+      per file</p>
+  </div>
 </kendo-dialog>
