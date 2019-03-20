@@ -1,3 +1,5 @@
+import { ProductFile } from './product-files/product-files.model';
+
 export interface Product {
     _id: string,
     name: string,
@@ -15,5 +17,5 @@ export interface Product {
         description: string
     },
     firstOrderedOn: Date,
-    files: string[]
+    files: ProductFile[]
 }

@@ -34,6 +34,20 @@ export class ProductsComponent implements OnInit {
     this.productService.read();
   }
 
+  public hasFiles = (dataItem: Product): boolean => dataItem.files && dataItem.files.length > 0;
+
+  public openUploadModal = (product: Product) => this.productToUploadFiles = product;
+
+  public closeUploadModal() {
+    this.productToUploadFiles = undefined;
+    this.updateProducts();
+  }
+
+  public updateProducts() {
+    this.productService.reset();
+    this.productService.read();
+  }
+
   public onStateChange(state: State) {
     this.gridState = state;
     this.productService.read();
@@ -81,19 +95,5 @@ export class ProductsComponent implements OnInit {
   }
   public removeHandler({ dataItem }) {
     this.productService.remove(dataItem);
-  }
-
-  public hasFiles = (dataItem: Product): boolean => dataItem.files && dataItem.files.length > 0;
-
-  public openUploadModal = (product: Product) => this.productToUploadFiles = product;
-
-  public closeUploadModal() {
-    this.productToUploadFiles = undefined;
-    this.updateProducts();
-  }
-
-  public updateProducts() {
-    this.productService.reset();
-    this.productService.read();
   }
 }
