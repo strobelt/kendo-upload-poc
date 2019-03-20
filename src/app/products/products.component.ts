@@ -8,6 +8,8 @@ import { State, process } from '@progress/kendo-data-query';
 import { map } from 'rxjs/operators/map';
 import { ProductService } from './products.service';
 import { Product } from './products.model';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',
@@ -87,6 +89,10 @@ export class ProductsComponent implements OnInit {
 
   public closeUploadModal() {
     this.productToUploadFiles = undefined;
+    this.updateProducts();
+  }
+
+  public updateProducts() {
     this.productService.reset();
     this.productService.read();
   }

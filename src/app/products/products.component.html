@@ -67,4 +67,5 @@
   </ng-template>
 </kendo-grid>
 <app-product-files-upload [model]="productToUploadFiles"
-                          (close)="closeUploadModal()"></app-product-files-upload>
+                          (close)="closeUploadModal()"
+                          (uploadComplete)="updateProducts()"></app-product-files-upload>
