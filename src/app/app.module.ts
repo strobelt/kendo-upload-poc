@@ -15,6 +15,8 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { UploadModule } from '@progress/kendo-angular-upload';
 import { ProductFilesUploadComponent } from './products/product-files-upload/product-files-upload.component';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { FilePreviewSharedService } from './products/file-preview-shared.service';
+import { FilePreviewComponent } from './products/file-preview/file-preview.component';
 
 
 
@@ -25,7 +27,8 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
     NavbarComponent,
     ProductsComponent,
     ProductFilesComponent,
-    ProductFilesUploadComponent
+    ProductFilesUploadComponent,
+    FilePreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
   ],
   providers: [
     ProductService,
+    FilePreviewSharedService,
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

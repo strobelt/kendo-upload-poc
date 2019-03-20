@@ -2,9 +2,14 @@
   <li *ngFor="let file of product.files">
     <span><b>{{file.originalFileName}}</b> uploaded on <b>{{file.uploadDate | date:'dd/MM/yyyy HH:mm:ss'}}</b></span>
     <button kendoButton
-            class="download-button"
+            class="download-button k-primary"
             [icon]="'download'"
-            (click)="downloadFile(product._id, file)">
+            (click)="downloadFile(file)">
+    </button>
+    <button kendoButton
+            class="download-button k-primary"
+            [icon]="'preview'"
+            (click)="previewFile(file)">
     </button>
   </li>
 </ul>

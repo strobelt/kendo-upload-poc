@@ -1,0 +1,15 @@
+<div *ngIf="showPreview">
+  <kendo-dialog #previewDialog
+                *ngIf="showPreview"
+                (close)="closePreview()"
+                [minWidth]="800"
+                [width]="1200"
+                [height]="1200">
+    <kendo-dialog-titlebar>
+      Preview {{productFilePreview?.file?.originalFileName}}
+    </kendo-dialog-titlebar>
+    <iframe [src]="getBlobUrl()"
+            width="98%"
+            height="98%"></iframe>
+  </kendo-dialog>
+</div>

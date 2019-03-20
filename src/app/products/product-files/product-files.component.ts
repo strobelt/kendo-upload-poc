@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Product } from '../products.model';
 import { ProductFilesService } from './product-files.service';
 import { ProductFile } from './product-files.model';
+import { FilePreviewSharedService } from '../file-preview-shared.service';
+import { FilePreview } from '../file-preview/file-preview.model';
 
 @Component({
   selector: 'app-product-files',
@@ -11,12 +13,13 @@ import { ProductFile } from './product-files.model';
 export class ProductFilesComponent {
   @Input() product: Product;
 
-  constructor(private productFilesService: ProductFilesService) { }
+  constructor(private productFilesService: ProductFilesService,
+    private filePreviewSharedService: FilePreviewSharedService) { }
 
-  public downloadFile(productId: string, file: ProductFile) {
-    this.productFilesService.download(productId, file._id)
+  public downloadFile(file: ProductFile) {
+    this.productFilesService.download(file)
       .subscribe(blob => {
-        var a = document.createElement("a");
+        const a = document.createElement('a');
         a.style.display = 'none';
         document.body.appendChild(a);
         const url = window.URL.createObjectURL(blob);
@@ -24,6 +27,13 @@ export class ProductFilesComponent {
         a.download = file.originalFileName;
         a.click();
         window.URL.revokeObjectURL(url);
+      })
+  }
+
+  public previewFile(file: ProductFile) {
+    this.productFilesService.download(file)
+      .subscribe(blob => {
+        this.filePreviewSharedService.changePreview({ blob, file } as FilePreview);
       })
   }
 }
