@@ -47,7 +47,7 @@ exports.upload = function (req, res) {
 
 exports.download = function (req, res) {
     File.findOne({ _id: req.params.fileId, product: req.params.productId },
-        function (err, file) {
+        (err, file) => {
             if (err)
                 res.send(err)
             res.download(getPath(file.fileName))
@@ -56,8 +56,21 @@ exports.download = function (req, res) {
 
 exports.list = (req, res) =>
     File.find({ product: req.params.productId },
-        function (err, files) {
+        (err, files) => {
             if (err)
                 res.send(err)
             res.json(files)
+        })
+
+exports.remove = (req, res) =>
+    File.findOneAndRemove({ product: req.params.productId, _id: req.params.fileId },
+        (err, file) => {
+            if (err) res.send(err)
+            Product.findOne({ _id: req.params.productId }, (err, product) => {
+                if (err) res.send(err)
+                const index = product.files.findIndex(f => f._id.toString() == file._id.toString())
+                product.files.splice(index, 1)
+                product.save()
+                res.status(200).send()
+            })
         })

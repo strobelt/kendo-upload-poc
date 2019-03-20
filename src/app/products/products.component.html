@@ -63,7 +63,8 @@
   <ng-template kendoGridDetailTemplate
                let-dataItem
                [kendoGridDetailTemplateShowIf]="hasFiles">
-    <app-product-files [product]="dataItem"></app-product-files>
+    <app-product-files [product]="dataItem"
+                       (removeFileEvent)="updateProducts()"></app-product-files>
   </ng-template>
 </kendo-grid>
 <app-product-files-upload [model]="productToUploadFiles"

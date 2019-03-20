@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../products.model';
 import { ProductFilesService } from './product-files.service';
 import { ProductFile } from './product-files.model';
@@ -12,6 +12,7 @@ import { FilePreview } from '../file-preview/file-preview.model';
 })
 export class ProductFilesComponent {
   @Input() product: Product;
+  @Output() removeFileEvent = new EventEmitter();
 
   constructor(private productFilesService: ProductFilesService,
     private filePreviewSharedService: FilePreviewSharedService) { }
@@ -35,5 +36,11 @@ export class ProductFilesComponent {
       .subscribe(blob => {
         this.filePreviewSharedService.changePreview({ blob, file } as FilePreview);
       })
+  }
+
+  public removeFile(file: ProductFile) {
+    if (confirm(`Are you sure you want to delete ${file.originalFileName}?\r\nThere is no undoing it!`))
+      this.productFilesService.remove(file)
+        .subscribe(() => this.removeFileEvent.emit(''));
   }
 }

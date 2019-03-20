@@ -22,6 +22,11 @@ export class ProductFilesService {
       )
   }
 
+  public remove(file: ProductFile): Observable<any> {
+    return this.http
+      .delete(`${environment.apiUrl}/products/${file.product}/files/${file._id}`);
+  }
+
   private getFileType(file: ProductFile) {
     const extension = file.fileName.substring(file.fileName.lastIndexOf('.') + 1);
     if (extension == 'pdf') return 'application/pdf';

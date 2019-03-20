@@ -20,4 +20,5 @@ module.exports = (app) => {
 
     app.route('/products/:productId/files/:fileId')
         .get(filesController.download)
+        .delete(filesController.remove)
 }
