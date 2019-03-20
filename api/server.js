@@ -4,7 +4,8 @@ var express = require('express'),
     mongoose = require('mongoose'),
     Product = require('./models/product.model'),
     File = require('./models/file.model'),
-    bodyParser = require('body-parser')
+    bodyParser = require('body-parser'),
+    busboy = require('connect-busboy')
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise
@@ -17,6 +18,7 @@ var allowCrossDomain = function (req, res, next) {
     next()
 }
 app.use(allowCrossDomain)
+app.use(busboy())
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())

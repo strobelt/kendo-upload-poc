@@ -1,15 +1,13 @@
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { GridDataResult, SelectableSettings } from '@progress/kendo-angular-grid';
+import { GridDataResult, SelectableSettings, GridComponent } from '@progress/kendo-angular-grid';
 import { State, process } from '@progress/kendo-data-query';
 
 import { map } from 'rxjs/operators/map';
 import { ProductService } from './products.service';
 import { Product } from './products.model';
-import { UploadEvent } from '@progress/kendo-angular-upload';
-import { ProductFilesService } from './product-files/product-files.service';
 
 @Component({
   selector: 'app-products',
@@ -17,6 +15,7 @@ import { ProductFilesService } from './product-files/product-files.service';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
+
   public view: Observable<GridDataResult>;
   public gridState: State = {
     sort: [],
@@ -30,7 +29,6 @@ export class ProductsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.view = this.productService.pipe(map(data => process(data, this.gridState)));
-
     this.productService.read();
   }
 
@@ -85,6 +83,11 @@ export class ProductsComponent implements OnInit {
 
   public hasFiles = (dataItem: Product): boolean => dataItem.files && dataItem.files.length > 0;
 
-  public openUploadModal = (product: Product) =>
-    this.productToUploadFiles = product;
+  public openUploadModal = (product: Product) => this.productToUploadFiles = product;
+
+  public closeUploadModal() {
+    this.productToUploadFiles = undefined;
+    this.productService.reset();
+    this.productService.read();
+  }
 }

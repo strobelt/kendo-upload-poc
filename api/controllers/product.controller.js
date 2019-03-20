@@ -4,11 +4,13 @@ const mongoose = require('mongoose'),
     Product = mongoose.model('Product')
 
 exports.list_all_products = (_req, res) =>
-    Product.find({}, (err, products) => {
-        if (err)
-            res.send(err)
-        res.json(products)
-    })
+    Product.find()
+        .populate('files')
+        .exec((err, products) => {
+            if (err)
+                res.send(err)
+            res.json(products)
+        })
 
 
 exports.create_product = (req, res) =>
@@ -20,7 +22,7 @@ exports.create_product = (req, res) =>
 
 exports.read_product = (req, res) =>
     Product.findById(req.params.productId)
-        .populate('product')
+        .populate('files')
         .exec((err, product) => {
             if (err)
                 res.send(err)

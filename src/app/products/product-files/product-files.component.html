@@ -1,5 +1,5 @@
 <ul>
-  <li *ngFor="let file of view | async">
+  <li *ngFor="let file of product.files">
     <span><b>{{file.originalFileName}}</b> uploaded on <b>{{file.uploadDate | date:'dd/MM/yyyy HH:mm:ss'}}</b></span>
     <button kendoButton
             class="download-button"

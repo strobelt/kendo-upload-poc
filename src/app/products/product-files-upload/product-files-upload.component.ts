@@ -1,8 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../products.model';
-import { ProductFilesService } from '../product-files/product-files.service';
-import { UploadEvent, FileInfo } from '@progress/kendo-angular-upload';
-import { Observable } from 'rxjs-compat/Observable';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-files-upload',
@@ -10,7 +8,6 @@ import { Observable } from 'rxjs-compat/Observable';
   styleUrls: ['./product-files-upload.component.scss']
 })
 export class ProductFilesUploadComponent {
-
   public product: Product;
   public active = false;
 
@@ -19,23 +16,12 @@ export class ProductFilesUploadComponent {
     this.active = product !== undefined;
   }
 
-  @Output() cancel = new EventEmitter();
+  @Output() close = new EventEmitter();
 
-  constructor(private filesService: ProductFilesService) { }
-
-  public close() {
+  public closeModal() {
     this.active = false;
-    this.cancel.emit();
+    this.close.emit();
   }
 
-  public uploadEventHandler(e: UploadEvent) {
-    e.preventDefault();
-    e.files.forEach(file => this.uploadFile(file));
-  }
-
-  private uploadFile(file: FileInfo): void {
-    console.log(file);
-    this.filesService.upload(this.product._id, file.rawFile);
-  }
-
+  public uploadUrl = () => `${environment.apiUrl}/products/${this.product._id}/files`;
 }

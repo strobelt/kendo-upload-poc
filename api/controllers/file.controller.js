@@ -31,7 +31,7 @@ exports.upload = function (req, res) {
             }).save((err, file) => {
                 if (err)
                     res.send(err)
-                Product.findById(file.productId, function (err, product) {
+                Product.findById(file.product, function (err, product) {
                     if (err)
                         res.send(err)
                     if (!product.files) product.files = []
