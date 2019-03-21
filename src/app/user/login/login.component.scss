@@ -1,0 +1,26 @@
+.login-container {
+  height: 75vh;
+  display: flex;
+}
+
+.center-card {
+  min-width: 25%;
+  margin: 0 auto;
+  height: fit-content;
+  align-self: center;
+
+  kendo-textbox-container,
+  input {
+    width: 100%;
+    display: block;
+  }
+
+  mat-card-content {
+    margin: 0 16px;
+  }
+
+  mat-card-actions {
+    text-align: end;
+    margin: 10px 16px;
+  }
+}

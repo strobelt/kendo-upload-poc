@@ -1,0 +1,29 @@
+<div class="login-container">
+  <mat-card class="center-card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form"
+            action="">
+        <kendo-textbox-container floatingLabel="Username">
+          <input type="text"
+                 formControlName="username"
+                 kendoTextBox>
+        </kendo-textbox-container>
+        <kendo-textbox-container floatingLabel="Password">
+          <input type="password"
+                 formControlName="password"
+                 kendoTextBox>
+        </kendo-textbox-container>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button
+              color="primary"
+              type="button"
+              (click)="login()"
+              [disabled]="loggingIn">Login</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

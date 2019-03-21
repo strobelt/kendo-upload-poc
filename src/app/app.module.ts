@@ -4,6 +4,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+
 
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
@@ -17,6 +20,11 @@ import { ProductFilesUploadComponent } from './products/product-files-upload/pro
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { FilePreviewSharedService } from './products/file-preview-shared.service';
 import { FilePreviewComponent } from './products/file-preview/file-preview.component';
+import { LoginComponent } from './user/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputsModule } from '@progress/kendo-angular-inputs';
+import { UserService } from './user/user.service';
+
 
 
 
@@ -28,7 +36,8 @@ import { FilePreviewComponent } from './products/file-preview/file-preview.compo
     ProductsComponent,
     ProductFilesComponent,
     ProductFilesUploadComponent,
-    FilePreviewComponent
+    FilePreviewComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -38,10 +47,16 @@ import { FilePreviewComponent } from './products/file-preview/file-preview.compo
     HttpClientModule,
     ButtonsModule,
     UploadModule,
-    DialogsModule
+    DialogsModule,
+    FormsModule,
+    InputsModule,
+    MatCardModule,
+    MatButtonModule,
+    ReactiveFormsModule
   ],
   providers: [
     ProductService,
+    UserService,
     FilePreviewSharedService,
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }
   ],
