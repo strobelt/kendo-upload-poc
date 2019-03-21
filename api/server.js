@@ -1,17 +1,19 @@
-var express = require('express'),
+const express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
-    Product = require('./models/product.model'),
-    File = require('./models/file.model'),
     bodyParser = require('body-parser'),
     busboy = require('connect-busboy')
 
-// mongoose instance connection url connection
+require('./models/product.model')
+require('./models/file.model')
+require('./models/user.model')
+require('./passport')
+
 mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost/ProductsDb', { useNewUrlParser: true })
 
-var allowCrossDomain = function (req, res, next) {
+const allowCrossDomain = function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Headers', '*')
     res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE')
@@ -23,8 +25,11 @@ app.use(busboy())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-var productRoutes = require('./routes/product.routes')
+const productRoutes = require('./routes/product.routes')
 productRoutes(app)
+
+const userRoutes = require('./routes/user.routes')
+userRoutes(app)
 
 app.listen(port)
 
