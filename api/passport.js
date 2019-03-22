@@ -14,7 +14,7 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
 }, async function (username, password, next) {
     const user = await User.findOne({ username })
-    if (await bcrypt.compare(password, user.password)) {
+    if (user && await bcrypt.compare(password, user.password)) {
         user.password = undefined
         return next(null, user)
     }
