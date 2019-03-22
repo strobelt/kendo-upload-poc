@@ -4,7 +4,12 @@
       <mat-card-title>Welcome!</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>Please <a [routerLink]="['/login']">login</a> to continue</p>
+      <ng-container *ngIf="isLogged; else showLogin;">
+        <p>See the products <a [routerLink]="['/products']">here</a></p>
+      </ng-container>
+      <ng-template #showLogin>
+        <p>Please <a [routerLink]="['/login']">login</a> to continue</p>
+      </ng-template>
     </mat-card-content>
   </mat-card>
 </div>
