@@ -27,7 +27,8 @@ exports.upload = function (req, res) {
             new File({
                 originalFileName: fileName,
                 fileName: path.basename(filePath),
-                product: req.params.productId
+                product: req.params.productId,
+                owner: req.user._id
             }).save((err, file) => {
                 if (err)
                     res.send(err)

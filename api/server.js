@@ -3,15 +3,23 @@ const express = require('express'),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
-    busboy = require('connect-busboy')
+    busboy = require('connect-busboy'),
+    Product = require('./models/product.model'),
+    File = require('./models/file.model'),
+    User = require('./models/user.model'),
+    Log = require('./models/log.model'),
+    passportRules = require('./passport'),
+    loggedIn = () => require('passport').authenticate('jwt', { session: false }),
+    userMw = require('./middlewares/user-logging.middleware')
 
-require('./models/product.model')
-require('./models/file.model')
-require('./models/user.model')
-require('./passport')
 
 mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost/ProductsDb', { useNewUrlParser: true })
+
+const middlewares = [
+    loggedIn(),
+    userMw()
+]
 
 const allowCrossDomain = function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
@@ -26,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 const productRoutes = require('./routes/product.routes')
-productRoutes(app)
+productRoutes(app, middlewares)
 
 const userRoutes = require('./routes/user.routes')
 userRoutes(app)
