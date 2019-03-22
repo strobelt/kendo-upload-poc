@@ -10,16 +10,16 @@
           <input type="text"
                  formControlName="username"
                  kendoTextBox>
-          <mat-error *ngIf="form.controls.username.dirty && form.controls.username.invalid">Username required
-          </mat-error>
         </kendo-textbox-container>
+        <mat-error *ngIf="form.controls.username.dirty && form.controls.username.invalid">Username required
+        </mat-error>
         <kendo-textbox-container floatingLabel="Password">
           <input type="password"
                  formControlName="password"
                  kendoTextBox>
-          <mat-error *ngIf="form.controls.password.dirty && form.controls.password.invalid">Password required
-          </mat-error>
         </kendo-textbox-container>
+        <mat-error *ngIf="form.controls.password.dirty && form.controls.password.invalid">Password required
+        </mat-error>
       </form>
     </mat-card-content>
     <mat-card-actions>

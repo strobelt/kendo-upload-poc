@@ -1,0 +1,15 @@
+.home-container {
+  height: 75vh;
+  display: flex;
+}
+
+.center-card {
+  min-width: 25%;
+  margin: 0 auto;
+  height: fit-content;
+  align-self: center;
+
+  mat-card-content {
+    margin: 0 16px;
+  }
+}
