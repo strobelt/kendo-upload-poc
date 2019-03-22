@@ -4,8 +4,17 @@
       <a [routerLink]="[ '/' ]"
          class="brand-logo">Home</a>
     </h1>
-    <ul class="nav nav-right">
-      <li><a [routerLink]="[ '/products' ]">Products</a></li>
-    </ul>
+    <ng-container *ngIf="isLogged; else publicNav;">
+      <ul class="nav nav-right">
+        <li><a [routerLink]="[ '/products' ]">Products</a></li>
+        <li><a style="cursor: pointer;"
+             (click)="logout()">LogOut</a></li>
+      </ul>
+    </ng-container>
+    <ng-template #publicNav>
+      <ul class="nav nav-right">
+        <li><a [routerLink]="['/login']">LogIn</a></li>
+      </ul>
+    </ng-template>
   </div>
 </nav>

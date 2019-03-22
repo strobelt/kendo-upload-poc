@@ -15,7 +15,7 @@ import { ProductsComponent } from './products/products.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProductService } from './products/products.service';
 import { ProductFilesComponent } from './products/product-files/product-files.component';
-import { ApiInterceptor } from './interceptors/api-interceptor';
+import { ApiUrlInterceptor as ApiUrlInterceptor } from './interceptors/api-url.interceptor';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { UploadModule } from '@progress/kendo-angular-upload';
 import { ProductFilesUploadComponent } from './products/product-files-upload/product-files-upload.component';
@@ -26,6 +26,8 @@ import { LoginComponent } from './user/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { UserService } from './user/user.service';
+import { HomeComponent } from './home/home.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 
 
@@ -39,7 +41,8 @@ import { UserService } from './user/user.service';
     ProductFilesComponent,
     ProductFilesUploadComponent,
     FilePreviewComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ import { UserService } from './user/user.service';
     ProductService,
     UserService,
     FilePreviewSharedService,
-    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ApiUrlInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

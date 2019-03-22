@@ -3,6 +3,7 @@ import { UserService } from '../user.service';
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,8 @@ export class LoginComponent {
 
   constructor(private userService: UserService,
     private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
     private snackBar: MatSnackBar) { }
 
   public login() {
@@ -35,8 +38,8 @@ export class LoginComponent {
         user => {
           this.loggingIn = false;
           this.snackBar.open(`Welcome ${user.user.username}`, null, { duration: 2000 });
-          // store user
-          // redirect to products
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          this.router.navigate([returnUrl]);
         },
         () => {
           this.loggingIn = false;
