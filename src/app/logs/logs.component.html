@@ -1,0 +1,47 @@
+<kendo-grid [data]="view | async"
+            [groupable]="true"
+            [group]="gridState.group"
+            [skip]="gridState.skip"
+            [sort]="gridState.sort"
+            [sortable]="sortable"
+            [pageSize]="gridState.take"
+            [pageable]="true"
+            [filterable]="true"
+            [filter]="gridState.filter"
+            [reorderable]="true"
+            [resizable]="true"
+            (dataStateChange)="onStateChange($event)">
+
+  <kendo-grid-column field="date"
+                     title="Date"
+                     [width]="300"
+                     filter="date"
+                     format="yyyy-MM-dd HH:mm:ss.sss"></kendo-grid-column>
+
+  <kendo-grid-column field="method"
+                     title="Method"
+                     [width]="150"></kendo-grid-column>
+
+  <kendo-grid-column field="url"
+                     title="URL"
+                     [width]="450"></kendo-grid-column>
+
+  <kendo-grid-column field="username"
+                     title="User"
+                     [width]="200"></kendo-grid-column>
+
+  <ng-template kendoGridDetailTemplate
+               let-dataItem
+               [kendoGridDetailTemplateShowIf]="hasParamsOrBody">
+    <div *ngIf="hasParams(dataItem)">
+      <strong>Request Params:</strong>
+      <pre>{{parse(dataItem.params) | json}}
+    </pre>
+    </div>
+    <div *ngIf="hasBody(dataItem)">
+      <strong>Request Body:</strong>
+      <pre>{{parse(dataItem.body) | json}}
+    </pre>
+    </div>
+  </ng-template>
+</kendo-grid>

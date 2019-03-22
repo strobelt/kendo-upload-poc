@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
-import { tap } from 'rxjs/operators/tap';
-import { map } from 'rxjs/operators/map';
 import { Product } from './products.model';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable()
 export class ProductService extends BehaviorSubject<Product[]> {

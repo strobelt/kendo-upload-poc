@@ -28,6 +28,8 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { UserService } from './user/user.service';
 import { HomeComponent } from './home/home.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { LogsComponent } from './logs/logs.component';
+import { LogsService } from './logs/logs.service';
 
 
 
@@ -42,7 +44,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     ProductFilesUploadComponent,
     FilePreviewComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    LogsComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
   providers: [
     ProductService,
     UserService,
+    LogsService,
     FilePreviewSharedService,
     { provide: HTTP_INTERCEPTORS, useClass: ApiUrlInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }

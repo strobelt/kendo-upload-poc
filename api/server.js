@@ -36,6 +36,9 @@ app.use(bodyParser.json())
 const productRoutes = require('./routes/product.routes')
 productRoutes(app, middlewares)
 
+const logRoutes = require('./routes/log.routes')
+logRoutes(app, [loggedIn()])
+
 const userRoutes = require('./routes/user.routes')
 userRoutes(app)
 

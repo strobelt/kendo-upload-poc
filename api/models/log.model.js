@@ -10,10 +10,10 @@ const LogSchema = new Schema({
     body: String,
     userId: String,
     username: String,
-    payload: String,
     date: {
         type: Date,
-        default: new Date()
+        default: Date.now,
+        setDefaultsOnInsert: true
     }
 })
 

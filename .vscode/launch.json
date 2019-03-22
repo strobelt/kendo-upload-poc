@@ -12,7 +12,7 @@
                 "page",
                 "webview"
             ],
-            "urlFilter": "http://localhost:4200/",
+            "urlFilter": "http://localhost:4200/*",
             "port": 9222,
             "smartStep": true,
             "webRoot": "${workspaceFolder}"

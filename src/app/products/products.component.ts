@@ -1,15 +1,13 @@
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { GridDataResult, SelectableSettings, GridComponent } from '@progress/kendo-angular-grid';
+import { GridDataResult } from '@progress/kendo-angular-grid';
 import { State, process } from '@progress/kendo-data-query';
 
 import { map } from 'rxjs/operators/map';
 import { ProductService } from './products.service';
 import { Product } from './products.model';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',
@@ -52,11 +50,6 @@ export class ProductsComponent implements OnInit {
     this.gridState = state;
     this.productService.read();
   }
-
-  public selectableOptions: SelectableSettings = {
-    checkboxOnly: false,
-    mode: 'multiple'
-  };
 
   public sortable = {
     allowUnsort: true,
